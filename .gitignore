@@ -1,0 +1,21 @@
+# зависимости
+node_modules
+
+# сборка
+dist
+dist-ssr
+
+# логи
+logs
+*.log
+npm-debug.log*
+
+# системное / редакторы
+.DS_Store
+*.local
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# локальная конфигурация Claude Code (preview-сервер и т.п.)
+.claude
