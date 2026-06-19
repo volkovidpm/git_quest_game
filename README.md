@@ -1,5 +1,9 @@
 # GitQuest — учим git играя 🎮
 
+[![Deploy to GitHub Pages](https://github.com/volkovidpm/git_quest_game/actions/workflows/deploy.yml/badge.svg)](https://github.com/volkovidpm/git_quest_game/actions/workflows/deploy.yml)
+
+🎮 **Играть онлайн:** https://volkovidpm.github.io/git_quest_game/
+
 Браузерный тренажёр: вводишь настоящие git-команды и сразу видишь, как меняется дерево коммитов. 19 уровней в 5 мирах — от первого коммита до rebase, конфликтов и работы с удалёнкой.
 
 ## Запуск
@@ -35,3 +39,20 @@ npm run dev        # откроется на http://localhost:5173
 Поддерживаются: `commit`, `add`, `branch`, `switch`/`checkout`, `merge`, `log`, `status`,
 `reset`, `revert`, `rebase`, `cherry-pick`, `clone`, `fetch`, `pull`, `push`,
 ссылки вида `HEAD~2`, и служебные `clear` / `solution`.
+
+## Дальнейшие шаги (Roadmap)
+
+### 1. Справочная информация по каждому уровню — «зачем мы это делаем» (приоритет)
+
+Сейчас у уровня есть цель и подсказка, но не хватает контекста: **зачем эта команда нужна в реальной работе** и когда её применяют. Идея — добавить к каждому уровню справочный блок «Зачем это».
+
+Как реализовать в текущей архитектуре (всё data-driven, ядро менять не надо):
+- В тип `Level` ([src/levels/types.ts](src/levels/types.ts)) добавить опциональное поле, например `why?: string` (или богаче: `{ why: string; realLife: string; pitfalls?: string }`).
+- Заполнить его для каждого уровня в [src/levels/levels.ts](src/levels/levels.ts): простыми словами — что за команда, какую задачу решает, типичный сценарий в команде/на проекте (можно с привязкой к процессу «ветка → push → Merge Request»).
+- В панели уровня ([src/components/LevelPanel.tsx](src/components/LevelPanel.tsx)) показать это раскрывающимся блоком «📖 Зачем это» (рядом с «Подсказкой»), чтобы не отвлекало, но было под рукой.
+- Тон — как в этом README: коротко, по делу, на примерах из жизни.
+
+### Идеи на потом
+- Больше уровней: `rebase --onto`, `stash`, теги (`tag`), `.gitignore`.
+- Мелкая геймификация: звук/конфетти при прохождении мира, счётчик «решено с первой попытки».
+- Свой домен вместо `github.io` (по желанию).
